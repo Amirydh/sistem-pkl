@@ -43,7 +43,7 @@
                             </p>
                         </div>
                         <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-                            <h4 class="font-semibold text-gray-700 dark:text-gray-300">Lokasi PKL</h4>
+                            <h4 class="font-semibold text-gray-700 dark:text-gray-300">Ruangan</h4>
                             <p class="text-lg text-gray-900 dark:text-gray-100 mt-1">
                                 {{ $peserta->lokasiPkl->nama_tempat ?? 'Belum Ditentukan' }}
                             </p>

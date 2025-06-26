@@ -82,7 +82,7 @@
                                 <x-secondary-button class="w-full justify-center">{{ __('Tambah Pembimbing') }}</x-secondary-button>
                             </a>
                             <a href="{{ route('admin.lokasi-pkl.create') }}" class="w-full">
-                                <x-secondary-button class="w-full justify-center">{{ __('Tambah Lokasi PKL') }}</x-secondary-button>
+                                <x-secondary-button class="w-full justify-center">{{ __('Tambah Ruangan') }}</x-secondary-button>
                             </a>
                         </div>
                     </div>

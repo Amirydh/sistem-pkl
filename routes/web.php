@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rute dashboard utama yang mengarahkan pengguna berdasarkan peran
     Route::get('/dashboard', function () {
-        $user = Auth::user();
+        $user = auth()->user();
         if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         } elseif ($user->role === 'pembimbing') {

@@ -157,6 +157,18 @@
                             <div class="info-value">{{ $user->peserta->kelas }} / {{ $user->peserta->jurusan }}</div>
                         </div>
                     </div>
+                    <div class="info-row">
+                        <div class="info-content">
+                            <div class="info-label">Ruangan</div>
+                            <div class="info-value">
+                                @if($user->peserta && $user->peserta->lokasiPkl)
+                                    {{ $user->peserta->lokasiPkl->nama_tempat }}<br>
+                                @else
+                                    -
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 @endif
                 
                 {{-- Informasi Spesifik Pembimbing --}}
