@@ -1,4 +1,4 @@
-Collecting workspace informationBerikut penjelasan fitur-fitur website **Sistem Manajemen PKL**:
+**Sistem Manajemen PKL**:
 
 
 ### Fitur Utama Website
