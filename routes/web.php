@@ -19,8 +19,7 @@ use App\Http\Controllers\Pembimbing\DashboardController as PembimbingDashboardCo
 use App\Http\Controllers\Pembimbing\KegiatanController as PembimbingKegiatanController;
 use App\Http\Controllers\Pembimbing\AbsensiController as PembimbingAbsensiController;
 use App\Http\Controllers\Pembimbing\DaftarController as PembimbingDaftarController;
-
-
+use Illuminate\Container\Attributes\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rute dashboard utama yang mengarahkan pengguna berdasarkan peran
     Route::get('/dashboard', function () {
-        $user = auth()->user();
+        $user = Auth::user();
         if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         } elseif ($user->role === 'pembimbing') {
