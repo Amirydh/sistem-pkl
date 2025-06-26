@@ -44,7 +44,7 @@
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 h-10 w-10">
                                                     {{-- Tampilkan foto profil, atau default jika tidak ada --}}
-                                                    <img class="h-10 w-10 rounded-full object-cover" src="{{ $peserta->user->profile_photo_url }}" alt="{{ $peserta->user->name }}">
+                                                    <img class="h-10 w-10 rounded-full object-cover" src="{{ $peserta->user->profile_photo_base64 }}" alt="{{ $peserta->user->name }}">
                                                 </div>
                                                 <div class="ml-4">
                                                     <div class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ $peserta->user->name }}</div>
@@ -69,8 +69,7 @@
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
-                                            {{-- Ganti route() dengan route yang sesuai di aplikasi Anda --}}
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-200">Lihat Kegiatan</a>
+                                            <a href="{{ route('pembimbing.kegiatan.index') }}?peserta={{ $peserta->id }}" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-200">Lihat Kegiatan</a>
                                         </td>
                                     </tr>
                                 @empty

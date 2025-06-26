@@ -52,7 +52,7 @@
                     <a href="{{ route('admin.lokasi-pkl.index') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('admin.lokasi-pkl.*') ? 'bg-gray-100 dark:bg-gray-700' : '' }}"
                         @click="mobileSidebarOpen = false">
-                        <span class="flex-1 ml-3 whitespace-nowrap">Manajemen Lokasi PKL</span>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Manajemen Ruangan</span>
                     </a>
                 </li>
             @endif
@@ -76,7 +76,7 @@
                     <a href="{{ route('pembimbing.kegiatan.index') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('pembimbing.kegiatan.index') ? 'bg-gray-100 dark:bg-gray-700' : '' }}"
                         @click="mobileSidebarOpen = false">
-                        <span class="flex-1 ml-3 whitespace-nowrap">Validasi Kegiatan</span>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Daftar Kegiatan</span>
                     </a>
                 </li>
                 <li>

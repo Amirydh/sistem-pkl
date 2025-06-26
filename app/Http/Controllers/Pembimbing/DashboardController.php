@@ -17,8 +17,7 @@ class DashboardController extends Controller
             ->with('user')
             ->withCount(['kegiatans as kegiatan_menunggu_count' => function ($query) {
                 $query->where('status', 'menunggu persetujuan');
-            }])
-            ->paginate(10);
+            }])->paginate(10);
             
         return view('pembimbing.dashboard', compact('pembimbing', 'pesertas'));
     }

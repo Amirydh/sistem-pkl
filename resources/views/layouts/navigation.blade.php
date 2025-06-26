@@ -1,4 +1,3 @@
-
 <nav x-data="{ open: false }"
     class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 fixed w-full z-50">
     <!-- Primary Navigation Menu -->
@@ -34,6 +33,11 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <div class="flex items-center mr-3">
+                    <img class="h-9 w-9 rounded-full object-cover border border-gray-300 dark:border-gray-600"
+                        src="{{ Auth::user()->profile_photo_base64 }}" alt="{{ Auth::user()->name }}">
+                </div>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button

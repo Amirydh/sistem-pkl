@@ -11,19 +11,34 @@ use Illuminate\Support\Facades\Auth;
 class KegiatanController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $pembimbingId = Auth::user()->pembimbing->id;
 
-        // Ambil semua kegiatan dari peserta yang dibimbing oleh pembimbing ini
+        // Jika ada filter peserta, tampilkan hanya kegiatan peserta tersebut
+        if ($request->has('peserta')) {
+            $peserta = Peserta::with('user')->where('id', $request->peserta)
+                ->where('pembimbing_id', $pembimbingId)
+                ->firstOrFail();
+            $kegiatans = $peserta->kegiatans()->with('peserta.user')->latest()->paginate(15);
+            // Kirim juga $peserta ke view jika ingin highlight/filter
+            return view('pembimbing.kegiatan.index', compact('kegiatans', 'peserta'));
+        }
+
+        // Default: semua kegiatan dari peserta bimbingan
         $kegiatans = Kegiatan::whereHas('peserta', function ($query) use ($pembimbingId) {
             $query->where('pembimbing_id', $pembimbingId);
         })
-            ->with('peserta.user') // Load relasi untuk menampilkan nama peserta
-            ->latest() // Urutkan dari yang terbaru
+            ->with('peserta.user')
+            ->latest()
             ->paginate(15);
 
-        return view('pembimbing.kegiatan.index', compact('kegiatans'));
+        $pesertas = Peserta::with('user')
+            ->where('pembimbing_id', $pembimbingId)
+            ->orderBy('asal_sekolah')
+            ->paginate(10);
+
+        return view('pembimbing.kegiatan.index', compact('kegiatans', 'pesertas'));
     }
 
     // Menampilkan daftar kegiatan dari satu peserta

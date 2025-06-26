@@ -27,7 +27,22 @@
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                 @forelse ($absensiLog as $absen)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $absen->peserta->user->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    {{-- Tampilkan foto profil, atau default jika tidak ada --}}
+                                                    <img class="h-10 w-10 rounded-full object-cover" src="{{ $absen->peserta->user->profile_photo_base64 }}" alt="{{ $absen->peserta->user->name }}">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                        {{ $absen->peserta->user->name }}
+                                                    </div>
+                                                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                                                        {{ $absen->peserta->user->email }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $absen->tanggal_absensi->format('d M Y') }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @if ($absen->status == 'Hadir')

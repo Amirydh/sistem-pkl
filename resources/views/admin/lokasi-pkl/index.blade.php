@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Manajemen Lokasi PKL') }}
+            {{ __('Manajemen Ruangan') }}
         </h2>
     </x-slot>
 
@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-end mb-4">
                         <a href="{{ route('admin.lokasi-pkl.create') }}">
-                            <x-primary-button>{{ __('Tambah Lokasi PKL') }}</x-primary-button>
+                            <x-primary-button>{{ __('Tambah Ruangan') }}</x-primary-button>
                         </a>
                     </div>
 
