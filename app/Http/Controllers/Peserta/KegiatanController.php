@@ -13,6 +13,10 @@ class KegiatanController extends Controller
     // Menampilkan semua kegiatan milik peserta yang login
     public function index()
     {
+        $peserta = Auth::user()->peserta;
+        if (!$peserta->pembimbing_id ){
+            return redirect()->route('peserta.dashboard')->with('warning', 'Anda belum memiliki pembimbing. Tidak dapat mengakses kegiatan.');
+        }
         $kegiatans = Auth::user()->peserta->kegiatans()->orderBy('tanggal', 'desc')->paginate(10);
         return view('peserta.kegiatan.index', compact('kegiatans')); // Anda perlu membuat view ini
     }
@@ -20,12 +24,21 @@ class KegiatanController extends Controller
     // Menampilkan form untuk membuat kegiatan baru
     public function create()
     {
+        $peserta = Auth::user()->peserta;
+        if (!$peserta->pembimbing_id) {
+            return redirect()->route('peserta.dashboard')->with('warning', 'Anda belum memiliki pembimbing. Tidak dapat mengisi kegiatan.');
+        }
         return view('peserta.kegiatan.create'); // Anda perlu membuat view ini
     }
 
     // Menyimpan kegiatan baru
     public function store(Request $request)
     {
+        $peserta = Auth::user()->peserta;
+        if (!$peserta->pembimbing_id) {
+            return redirect()->route('peserta.dashboard')->with('warning', 'Anda belum memiliki pembimbing. Tidak dapat mengisi kegiatan.');
+        }
+
         $request->validate([
             'tanggal' => 'required|date',
             'judul_kegiatan' => 'required|string|max:255',
@@ -38,7 +51,7 @@ class KegiatanController extends Controller
             // Simpan foto ke storage/app/public/kegiatan-foto
             $pathFoto = $request->file('foto')->store('kegiatan-foto', 'public');
         }
-        
+
         Auth::user()->peserta->kegiatans()->create([
             'tanggal' => $request->tanggal,
             'judul_kegiatan' => $request->judul_kegiatan,
@@ -70,7 +83,7 @@ class KegiatanController extends Controller
             'deskripsi' => 'required|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         $pathFoto = $kegiatan->foto;
         if ($request->hasFile('foto')) {
             // Hapus foto lama jika ada

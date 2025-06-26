@@ -36,7 +36,7 @@
         </p>
     </header>
 
-    <a href="{{ route('profile.export') }}" class="inline-flex items-center mt-4">
+    <a href="{{ route('profile.export') }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center mt-4">
         <x-primary-button>
             {{ __('Unduh Kartu (PDF)') }}
         </x-primary-button>

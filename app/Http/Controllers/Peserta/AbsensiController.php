@@ -15,6 +15,11 @@ class AbsensiController extends Controller
      */
     public function index()
     {
+        $peserta = Auth::user()->peserta;
+        if (!$peserta->pembimbing_id) {
+            return redirect()->route('peserta.dashboard')->with('warning', 'Anda belum memiliki peserta. Tidak dapat mengakses riwayat absensi.');
+        }
+
         $riwayatAbsensi = Absensi::where('peserta_id', Auth::user()->peserta->id)
             ->latest('tanggal_absensi')
             ->paginate(15); // Paginasi untuk riwayat yang panjang

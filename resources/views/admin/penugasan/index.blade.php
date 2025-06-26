@@ -26,6 +26,7 @@
                                 <thead class="bg-gray-50 dark:bg-gray-700">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Nama Peserta</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Sekolah / Kampus</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Tugaskan Pembimbing</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Tugaskan Lokasi PKL</th>
                                     </tr>
@@ -34,6 +35,7 @@
                                     @foreach ($pesertas as $peserta)
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap font-medium">{{ $peserta->user->name }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $peserta->asal_sekolah }}</td>
                                             <td class="px-6 py-4">
                                                 {{-- Dropdown untuk Pembimbing --}}
                                                 <select name="pembimbing_id[{{ $peserta->id }}]" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">

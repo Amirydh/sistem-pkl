@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable implements MustVerifyEmail
+
+class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -47,17 +48,20 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the URL to the user's profile photo.
      *
-     * @return string
+     * @return string 
      */
     // 3. Buat Accessor untuk mendapatkan URL foto profil
-    public function getProfilePhotoUrlAttribute()
-    {
-        if ($this->profile_photo_path) {
-            return asset('storage/' . $this->profile_photo_path);
-        }
-
-        return $this->defaultProfilePhotoUrl();
+   public function getProfilePhotoBase64Attribute()
+{
+    if ($this->profile_photo_path && Storage::disk('public')->exists($this->profile_photo_path)) {
+        $path = storage_path('app/public/' . $this->profile_photo_path);
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        return 'data:image/' . $type . ';base64,' . base64_encode($data);
     }
+    // fallback ke SVG default
+    return $this->defaultProfilePhotoUrl();
+}
 
     /**
      * Get the default profile photo URL if no profile photo has been uploaded.

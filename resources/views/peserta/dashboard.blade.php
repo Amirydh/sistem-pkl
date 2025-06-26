@@ -19,6 +19,11 @@
                             <p class="mt-1 text-gray-600 dark:text-gray-400">
                                 Ini adalah halaman utama Anda untuk mengelola jurnal kegiatan PKL.
                             </p>
+                            @if (session('warning'))
+                            <div class="mb-4 text-sm text-yellow-800 bg-yellow-100 p-3 rounded-lg">
+                                {{ session('warning') }}
+                            </div>
+                            @endif
                             <div class="mt-6">
                                 <a href="{{ route('peserta.kegiatan.create') }}">
                                     <x-primary-button>
@@ -28,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Info Pembimbing & Lokasi -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
@@ -65,14 +70,14 @@
                     </div>
                     <hr class="dark:border-gray-600">
                     <h4 class="font-semibold text-lg text-gray-800 dark:text-gray-200 pt-2">Kegiatan Terbaru</h4>
-                     <div class="space-y-3">
+                    <div class="space-y-3">
                         @forelse ($kegiatanTerbaru as $kegiatan)
-                            <div class="text-sm">
-                                <p class="text-gray-800 dark:text-gray-200 truncate">{{ $kegiatan->judul_kegiatan }}</p>
-                                <p class="text-xs text-gray-500">{{ $kegiatan->tanggal->format('d M Y') }}</p>
-                            </div>
+                        <div class="text-sm">
+                            <p class="text-gray-800 dark:text-gray-200 truncate">{{ $kegiatan->judul_kegiatan }}</p>
+                            <p class="text-xs text-gray-500">{{ $kegiatan->tanggal->format('d M Y') }}</p>
+                        </div>
                         @empty
-                            <p class="text-sm text-gray-500">Belum ada kegiatan.</p>
+                        <p class="text-sm text-gray-500">Belum ada kegiatan.</p>
                         @endforelse
                     </div>
                     <div class="pt-4">

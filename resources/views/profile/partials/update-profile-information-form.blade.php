@@ -36,7 +36,7 @@
 
             <!-- Foto Profil Saat Ini (Yang Ditampilkan) -->
             <div class="mt-2" x-show="! photoPreview">
-                <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}" class="rounded-full h-20 w-20 object-cover">
+                <img src="{{ auth()->user()->profile_photo_base64 }}" alt="{{ auth()->user()->name }}" class="rounded-full h-20 w-20 object-cover">
             </div>
 
             <!-- Pratinjau Foto Profil Baru -->
@@ -60,11 +60,6 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')" />

@@ -1,5 +1,3 @@
-{{-- File: resources/views/layouts/partials/sidebar.blade.php --}}
-
 <aside
     class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
     :class="{ 'translate-x-0': mobileSidebarOpen }" aria-label="Sidebar">
@@ -68,8 +66,8 @@
                     <span class="px-2 text-xs font-semibold text-gray-500 uppercase">Menu Pembimbing</span>
                 </li>
                 <li>
-                    <a href="{{ route('pembimbing.dashboard') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('pembimbing.dashboard') ? 'bg-gray-100 dark:bg-gray-700' : '' }}"
+                    <a href="{{ route('pembimbing.peserta.index') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('pembimbing.peserta.index') ? 'bg-gray-100 dark:bg-gray-700' : '' }}"
                         @click="mobileSidebarOpen = false">
                         <span class="flex-1 ml-3 whitespace-nowrap">Daftar Peserta</span>
                     </a>

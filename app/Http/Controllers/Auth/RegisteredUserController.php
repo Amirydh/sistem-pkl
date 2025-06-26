@@ -31,9 +31,9 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'profile_photos' => 'nullable', 'image', 'mimes:jpg,jpeg,png|max:5048',
         ]);
 
         $user = User::create([
@@ -46,10 +46,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        if ($request->hasFile('profile_picture')) {
-    $path = $request->file('profile_picture')->store('profile_pictures', 'public');
-    $user->profile_picture = $path;
-    $user->save();}
+        if ($request->hasFile('profile_photos')) {
+            $path = $request->file('profile_photos')->store('profile_photos', 'public');
+            $user->profile_picture = $path;
+            $user->save();
+        }
 
         return redirect(route('dashboard', absolute: false));
     }

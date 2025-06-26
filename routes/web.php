@@ -18,6 +18,7 @@ use App\Http\Controllers\Peserta\AbsensiController as PesertaAbsensiController;
 use App\Http\Controllers\Pembimbing\DashboardController as PembimbingDashboardController;
 use App\Http\Controllers\Pembimbing\KegiatanController as PembimbingKegiatanController;
 use App\Http\Controllers\Pembimbing\AbsensiController as PembimbingAbsensiController;
+use App\Http\Controllers\Pembimbing\DaftarController as PembimbingDaftarController;
 
 
 
@@ -26,6 +27,7 @@ use App\Http\Controllers\Pembimbing\AbsensiController as PembimbingAbsensiContro
 | Rute Publik (Bisa diakses tanpa login)
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -65,15 +67,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // GRUP ROUTE UNTUK ADMIN
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-        Route::get('/peserta/export/csv', [AdminPesertaController::class, 'exportCsv'])->name('peserta.export.csv');
         Route::resource('peserta', AdminPesertaController::class)->parameters(['peserta' => 'peserta']);
         Route::resource('pembimbing', AdminPembimbingController::class);
         Route::resource('lokasi-pkl', AdminLokasiPklController::class);
 
-    // RUTE BARU UNTUK HALAMAN PENUGASAN
-    Route::get('/penugasan', [PenugasanController::class, 'index'])->name('penugasan.index');
-    Route::post('/penugasan', [PenugasanController::class, 'store'])->name('penugasan.store');
-
+        // RUTE BARU UNTUK HALAMAN PENUGASAN
+        Route::get('/penugasan', [PenugasanController::class, 'index'])->name('penugasan.index');
+        Route::post('/penugasan', [PenugasanController::class, 'store'])->name('penugasan.store');
     });
 
     // GRUP ROUTE UNTUK PEMBIMBING
@@ -83,10 +83,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/kegiatan/{peserta}', [PembimbingKegiatanController::class, 'show'])->name('kegiatan.show');
         Route::post('/kegiatan/{kegiatan}/validasi', [PembimbingKegiatanController::class, 'validasi'])->name('kegiatan.validasi');
         Route::get('/absensi', [PembimbingAbsensiController::class, 'index'])->name('absensi.index');
+        Route::get('/absensi/{peserta}', [PembimbingAbsensiController::class, 'show'])->name('absensi.show');
+        // Route daftar peserta sesuai sidebar dan kebutuhan lain
+        Route::get('/peserta', [PembimbingDaftarController::class, 'index'])->name('peserta.index');
     });
 
     // RUTE KHUSUS UNTUK PESERTA
-    Route::middleware('role:peserta')->prefix('peserta')->name('peserta.')->group(function() {
+    Route::middleware('role:peserta')->prefix('peserta')->name('peserta.')->group(function () {
         // Rute untuk melengkapi profil (di luar middleware 'profile.completed')
         Route::get('/profile/create', [PesertaProfileController::class, 'create'])->name('profile.create');
         Route::post('/profile/store', [PesertaProfileController::class, 'store'])->name('profile.store');
@@ -99,14 +102,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('/absensi', [PesertaAbsensiController::class, 'store'])->name('absensi.store');
             Route::resource('kegiatan', PesertaKegiatanController::class);
         });
+
+       
     });
 
+   
 });
 
 
-/*
-|--------------------------------------------------------------------------
-| Rute Autentikasi dari Breeze (Login, Register, dll.)
-|--------------------------------------------------------------------------
-*/
+
 require __DIR__ . '/auth.php';
