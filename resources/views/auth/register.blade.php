@@ -38,14 +38,6 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="mt-4">
-            <label for="profile_picture" class="block text-sm font-medium text-gray-700">Foto Profil</label>
-            <input id="profile_picture" name="profile_picture" type="file" class="mt-1 block w-full"
-                accept="profile-photos/*">
-            @error('profile_picture')
-                <span class="text-red-500 text-xs">{{ $message }}</span>
-            @enderror
-        </div>
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"

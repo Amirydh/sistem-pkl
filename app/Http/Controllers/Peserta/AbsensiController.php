@@ -17,7 +17,7 @@ class AbsensiController extends Controller
     {
         $peserta = Auth::user()->peserta;
         if (!$peserta->pembimbing_id) {
-            return redirect()->route('peserta.dashboard')->with('warning', 'Anda belum memiliki peserta. Tidak dapat mengakses riwayat absensi.');
+            return redirect()->route('peserta.dashboard')->with('warning', 'Anda belum memiliki pembimbing. Tidak dapat mengakses riwayat absensi.');
         }
 
         $riwayatAbsensi = Absensi::where('peserta_id', Auth::user()->peserta->id)
